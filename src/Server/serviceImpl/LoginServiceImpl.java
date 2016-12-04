@@ -12,8 +12,8 @@ import java.sql.Timestamp;
 /**
  * Created by Sun YuHao on 2016/12/3.
  */
-public class LoginServiceImpl extends UnicastRemoteObject implements LoginService {
-    public LoginServiceImpl() throws RemoteException {
+public class LoginServiceImpl implements LoginService {
+    public LoginServiceImpl()  {
     }
 
     private String OK(String session) {
@@ -30,7 +30,7 @@ public class LoginServiceImpl extends UnicastRemoteObject implements LoginServic
     }
 
     @Override
-    public String login(String username, String password) throws RemoteException {
+    public String login(String username, String password) {
         try {
             PreparedStatement prep = DBManager.getConn().prepareStatement("SELECT * FROM User WHERE username=?");
             prep.setString(1, username);
@@ -55,7 +55,7 @@ public class LoginServiceImpl extends UnicastRemoteObject implements LoginServic
     }
 
     @Override
-    public String register(String username, String password) throws RemoteException {
+    public String register(String username, String password) {
         if (!validUserName(username)) {
             return ERR(4);
         } else if (!validPassword(password)) {

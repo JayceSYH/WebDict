@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="WebDict2:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="WebDict.war">
+      <element id="artifact" artifact-name="WebDict2:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -19,4 +19,8 @@ public class UserManager {
     static public UserInfo getUserInfo() throws NotLoginException {
         return userInfo;
     }
+
+    static public boolean isLogin() {
+        return userInfo != null;
+    }
 }

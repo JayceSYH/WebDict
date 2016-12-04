@@ -10,10 +10,10 @@ import java.sql.ResultSet;
 /**
  * Created by Sun YuHao on 2016/12/1.
  */
-public class QueryServiceImpl extends UnicastRemoteObject implements QueryService {
+public class QueryServiceImpl implements QueryService {
     private Crawler crawler;
 
-    public QueryServiceImpl() throws RemoteException {
+    public QueryServiceImpl() {
         crawler = new Crawler();
     }
 
@@ -23,7 +23,7 @@ public class QueryServiceImpl extends UnicastRemoteObject implements QueryServic
     }
 
     @Override
-    public void toggleApprovTranslation(String session, String word, String translator) throws RemoteException {
+    public void toggleApprovTranslation(String session, String word, String translator) {
         try {
             int userId = 0;
             ResultSet res = DBManager.getConn().prepareStatement("SELECT user_id FROM Session WHERE session='" + session + "'").executeQuery();
@@ -53,7 +53,7 @@ public class QueryServiceImpl extends UnicastRemoteObject implements QueryServic
     }
 
     @Override
-    public int getApprovNum(String word, String translator) throws RemoteException {
+    public int getApprovNum(String word, String translator) {
         try {
             PreparedStatement prep = DBManager.getConn().
                     prepareStatement("SELECT COUNT(*) AS num FROM UserWord WHERE word=? AND translator=? AND approve=1");

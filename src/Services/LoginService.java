@@ -22,7 +22,7 @@ import java.rmi.RemoteException;
  * 5:username already exist
  *
  */
-public interface LoginService extends Remote {
-    String login(String username, String password) throws RemoteException;
-    String register(String username, String password) throws RemoteException;
+public interface LoginService{
+    String login(String username, String password);
+    String register(String username, String password);
 }

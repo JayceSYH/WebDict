@@ -1,8 +1,9 @@
 package Server.serviceImpl;
 
+import java.net.URL;
 import java.util.Scanner;
-import java.util.regex.*;
-import java.net.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Crawler {
 
@@ -64,7 +65,7 @@ public class Crawler {
 	private String query(String s, String dict, String substitute, Pattern outterPattern, Pattern innerPattern) {
 		try{
 			URL url = new URL(dict + s.replaceAll("[ \t]", substitute));
-			Scanner in = new Scanner(url.openStream());
+			Scanner in = new Scanner(url.openStream(), "UTF-8");
 			StringBuilder content = new StringBuilder();
 			StringBuilder ret = new StringBuilder();
 			while(in.hasNextLine()) content = content.append(in.nextLine().trim());
@@ -98,7 +99,7 @@ public class Crawler {
 		 Crawler c = new Crawler();
 
 
-		 System.out.print(c.queryAll("what"));
+		 System.out.print(c.queryAll("what")[0]);
 	 }
 
 }

@@ -1,13 +1,12 @@
 package Client.ui;
 
+import Client.ClientService.RemoteHelper;
 import Client.ClientService.UserInfo;
 import Client.ClientService.UserManager;
-import Client.rmi.RemoteHelper;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -163,8 +162,8 @@ public class MainFrame extends JFrame {
 							if (checkedQuery[0]) {
 								try {
 									String word = queryField.getText();
-									baiduApprovNum.setText("赞：" +
-											RemoteHelper.getInstance().getQueryService().getApprovNum(word, "baidu"));
+									new Thread(()->{baiduApprovNum.setText("赞：" +
+											RemoteHelper.getInstance().getQueryService().getApprovNum(word, "baidu"));}).run();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -173,8 +172,8 @@ public class MainFrame extends JFrame {
 							if (checkedQuery[1]) {
 								try {
 									String word = queryField.getText();
-									youdaoApprovNum.setText("赞：" +
-											RemoteHelper.getInstance().getQueryService().getApprovNum(word, "youdao"));
+									new Thread(()->{youdaoApprovNum.setText("赞：" +
+											RemoteHelper.getInstance().getQueryService().getApprovNum(word, "youdao"));}).run();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -183,8 +182,8 @@ public class MainFrame extends JFrame {
 							if (checkedQuery[2]) {
 								try {
 									String word = queryField.getText();
-									bingApprovNum.setText("赞：" +
-											RemoteHelper.getInstance().getQueryService().getApprovNum(word, "bing"));
+									new Thread(()->{bingApprovNum.setText("赞：" +
+											RemoteHelper.getInstance().getQueryService().getApprovNum(word, "bing"));}).run();
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -192,7 +191,7 @@ public class MainFrame extends JFrame {
 						};
 					}).run();
 				}
-				catch (RemoteException r) {
+				catch (Exception r) {
 					r.printStackTrace();
 				}
 			}
@@ -228,7 +227,7 @@ public class MainFrame extends JFrame {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						if (checkedQuery[0]) {
+						if (checkedQuery[0] && UserManager.isLogin() && !baiduText.getText().equals("")) {
 							try {
 								String word = queryField.getText();
 								RemoteHelper.getInstance().getQueryService().
@@ -238,8 +237,6 @@ public class MainFrame extends JFrame {
 							} catch (Exception e2) {
 								e2.printStackTrace();
 							}
-
-
 						}
 					}
 				}).run();
@@ -279,7 +276,7 @@ public class MainFrame extends JFrame {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						if (checkedQuery[1]) {
+						if (checkedQuery[1] && UserManager.isLogin() && !youdaoText.getText().equals("")) {
 							try {
 								String word = queryField.getText();
 								RemoteHelper.getInstance().getQueryService().
@@ -331,7 +328,7 @@ public class MainFrame extends JFrame {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						if (checkedQuery[2]) {
+						if (checkedQuery[2] && UserManager.isLogin() &&!bingText.getText().equals("")) {
 							try {
 								String word = queryField.getText();
 								RemoteHelper.getInstance().getQueryService().

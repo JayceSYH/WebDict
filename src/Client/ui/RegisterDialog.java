@@ -1,7 +1,7 @@
 package Client.ui;
 
+import Client.ClientService.RemoteHelper;
 import Client.ClientService.UserInfo;
-import Client.rmi.RemoteHelper;
 
 import javax.swing.*;
 import java.awt.*;
